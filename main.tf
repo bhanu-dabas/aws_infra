@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-south-1"
 }
 
 # vpc
@@ -8,7 +8,7 @@ resource "aws_vpc" "deploy_vpc" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "sonarqube"
+    Name = "ubuntu"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_internet_gateway" "deploy_igw" {
   vpc_id = aws_vpc.deploy_vpc.id
 
   tags = {
-    Name = "sonar-igw"
+    Name = "ubuntu-igw"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_internet_gateway" "deploy_igw" {
 resource "aws_eip" "deploy_elasticip" {
   domain = "vpc"
   tags = {
-    Name = "sonar-elasticip"
+    Name = "ubuntu-elasticip"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_nat_gateway" "deploy_nat_gateway" {
   subnet_id     = aws_subnet.deploy_subnet_public.id
 
   tags = {
-    Name = "sonar-nat-gateway"
+    Name = "ubuntu-nat-gateway"
   }
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
